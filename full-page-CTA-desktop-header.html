@@ -1,0 +1,47 @@
+<script type='text/x-handlebars' data-template-name='discovery'>
+
+  <div class="container">
+    {{discourse-banner user=currentUser banner=site.banner}}
+  </div>
+
+  {{#unless currentUser}}
+  <div id="full-page-signup-cta">
+      {{d-button action="showLogin" class="btn-primary btn-small login-button" label="log_in" }}
+      <img src="your logo URL here"/>
+      <h1>Your headline</h1>
+      <h4><span>Subheader text</span></h4>
+      {{d-button action="showCreateAccount" class="btn-primary btn-large sign-up-button" label="signup_cta.sign_up" }}
+  </div>
+  {{/unless}}
+
+  <div class="list-controls">
+    <div class="container">
+      {{outlet "navigation-bar"}}
+    </div>
+  </div>
+
+  {{conditional-loading-spinner condition=loading}}
+
+  <div class="container list-container {{if loading "hidden"}}">
+    <div class="row">
+      <div class="full-width">
+        <div id="header-list-area">
+          {{outlet "header-list-container"}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="full-width">
+        <div id="list-area">
+          {{plugin-outlet name="discovery-list-container-top"
+                          args=(hash category=category)}}
+          {{outlet "list-container"}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{plugin-outlet name="discovery-below"}}
+
+</script>
+In the CSS tab, add this:
